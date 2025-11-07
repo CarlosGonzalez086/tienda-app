@@ -1,0 +1,9 @@
+
+.card-body { padding: 2rem; }
+
+.bi-check-lg { vertical-align: middle; }
+
+
+@media (max-width: 576px) {
+  .card-body { padding: 1.25rem; }
+}

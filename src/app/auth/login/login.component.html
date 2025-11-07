@@ -1,0 +1,46 @@
+<div class="login-wrapper">
+  <form (ngSubmit)="submit()" [formGroup]="form" class="login-form" novalidate>
+    <h2>Iniciar sesión</h2>
+
+    <label class="form-label">
+      Correo
+      <input
+        class="form-control"
+        type="email"
+        formControlName="correo_electronico"
+        placeholder="tu@correo.com"
+      />
+    </label>
+    <div
+      class="error text-danger small"
+      *ngIf="form.get('correo_electronico')?.touched && form.get('correo_electronico')?.invalid"
+    >
+      Introduce un correo válido.
+    </div>
+
+    <label class="form-label mt-2">
+      Contraseña
+      <input
+        class="form-control"
+        type="password"
+        formControlName="contrasena"
+        placeholder="••••••"
+      />
+    </label>
+    <div
+      class="error text-danger small"
+      *ngIf="form.get('contrasena')?.touched && form.get('contrasena')?.invalid"
+    >
+      La contraseña debe tener al menos 4 caracteres.
+    </div>
+
+    <div class="actions mt-3 d-flex align-items-center gap-2">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
+      </button>
+      <a class="btn btn-outline-secondary ms-auto" routerLink="/register">Crear cuenta</a>
+    </div>
+
+    <div class="error text-danger mt-3" *ngIf="error">{{ error }}</div>
+  </form>
+</div>

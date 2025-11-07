@@ -1,0 +1,106 @@
+.articles-container {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+
+.card-image {
+  height: 150px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fafafa;
+  overflow:hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  color:#999;
+  font-size: 0.9rem;
+}
+
+.card-body {
+  padding: 0.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+  flex:1;
+}
+
+.card-title {
+  margin:0;
+  font-size: 1rem;
+  line-height:1.2;
+  height:2.4rem;
+  overflow:hidden;
+}
+
+.card-stock {
+  margin:0;
+  font-size:0.9rem;
+}
+
+.card-stock.out {
+  color: #b00020;
+  font-weight:600;
+}
+
+.card-price {
+  margin-top:auto;
+  font-weight:700;
+  font-size:1.05rem;
+}
+
+.paginator {
+  display:flex;
+  gap:0.25rem;
+  justify-content:center;
+  margin-top:1rem;
+}
+
+.paginator button {
+  padding:0.3rem 0.6rem;
+  border:1px solid #ddd;
+  background:#fff;
+  cursor:pointer;
+  border-radius:4px;
+}
+
+.paginator button.active {
+  background:#1976d2;
+  color:#fff;
+  border-color:#1976d2;
+}
+
+.paginator button[disabled] {
+  opacity:0.5;
+  cursor:not-allowed;
+}

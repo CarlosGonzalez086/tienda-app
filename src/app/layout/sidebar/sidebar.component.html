@@ -1,0 +1,164 @@
+<div class="sidebar-overlay" *ngIf="openOnMobile" (click)="closeMobile()"></div>
+
+<nav
+  class="sidebar d-flex flex-column bg-dark text-white p-3"
+  [class.collapsed]="collapsed"
+  [class.open-mobile]="openOnMobile"
+  role="navigation"
+  aria-label="Sidebar principal"
+  style="width: var(--sidebar-width, 220px)"
+>
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div class="d-flex align-items-center gap-2" style="cursor: pointer" (click)="goHome()">
+      <span class="logo-icon fs-4">🛍️</span>
+      <span class="logo-text fw-bold ms-1" *ngIf="!collapsed">MiTienda</span>
+    </div>
+
+    <div class="d-flex align-items-center gap-1">
+      <button
+        type="button"
+        class="btn btn-outline-light btn-sm d-none d-md-inline-flex"
+        title="Colapsar"
+        (click)="toggleCollapse()"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-outline-light btn-sm d-md-none"
+        title="Abrir menú"
+        (click)="openMobile()"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </div>
+
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item mb-1">
+      <button
+        type="button"
+        class="nav-link btn btn-dark text-start w-100 d-flex align-items-center"
+        (click)="goHome()"
+      >
+        <span class="me-2">🏠</span>
+        <span class="flex-grow-1" *ngIf="!collapsed">Home</span>
+      </button>
+    </li>
+
+    <li class="nav-item mb-1">
+      <button
+        type="button"
+        class="nav-link btn btn-dark text-start w-100 d-flex align-items-center"
+        (click)="openCart()"
+      >
+        <span class="me-2">🛒</span>
+        <span class="flex-grow-1" *ngIf="!collapsed">Carrito</span>
+
+        <ng-container *ngIf="cartCount$ | async as c">
+          <span class="badge bg-danger ms-2" *ngIf="!collapsed">{{ c }}</span>
+          <span class="badge bg-danger ms-2 small" *ngIf="collapsed">{{ c }}</span>
+        </ng-container>
+      </button>
+    </li>
+    <li class="nav-item mb-1">
+      <button
+        type="button"
+        class="nav-link btn btn-dark text-start w-100 d-flex align-items-center"
+        (click)="openOrders()"
+      >
+        <span class="me-2">📦</span>
+        <span class="flex-grow-1" *ngIf="!collapsed">Pedidos</span>
+      </button>
+  </ul>
+
+  <div class="mt-3"></div>
+
+  <div class="user-area mt-auto d-flex align-items-center gap-2">
+    <ng-container *ngIf="user$ | async as user; else notLogged">
+      <!-- ... resto del template ... -->
+
+      <div class="user-area mt-auto d-flex align-items-center gap-2">
+        <ng-container *ngIf="user$ | async as user; else notLogged">
+          <button
+            class="btn btn-dark d-flex align-items-center p-0 border-0"
+            (click)="loginOrProfile()"
+            type="button"
+            aria-label="Perfil"
+          >
+            <!-- Icono de Bootstrap en lugar de imagen -->
+            <div
+              class="avatar-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-secondary text-white"
+              role="img"
+              aria-hidden="false"
+              aria-label="Usuario"
+            >
+              <i class="bi bi-person" aria-hidden="true" style="font-size: 1.1rem"></i>
+            </div>
+
+            <div class="ms-2 text-start" *ngIf="!collapsed">
+              <div class="fw-semibold">{{ $any(user).nombre ?? $any(user).name }}</div>
+              <small class="text-muted d-block">Perfil</small>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-light btn-sm ms-auto"
+            title="Cerrar sesión"
+            (click)="doLogout()"
+          >
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </ng-container>
+
+        <ng-template #notLogged>
+          <div class="d-flex align-items-center gap-2 w-100">
+            <button
+              type="button"
+              class="btn btn-outline-light btn-sm w-100 text-start"
+              (click)="loginOrProfile()"
+            >
+              <span class="me-2">🔐</span>
+              <span *ngIf="!collapsed">Iniciar sesión</span>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-light btn-sm"
+              (click)="doLoginDemo()"
+              title="Simular login"
+            >
+              ▶
+            </button>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- ... resto del template ... -->
+    </ng-container>
+
+    <ng-template #notLogged>
+      <div class="d-flex align-items-center gap-2 w-100">
+        <button
+          type="button"
+          class="btn btn-outline-light btn-sm w-100 text-start"
+          (click)="loginOrProfile()"
+        >
+          <span class="me-2">🔐</span>
+          <span *ngIf="!collapsed">Iniciar sesión</span>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-light btn-sm"
+          (click)="doLoginDemo()"
+          title="Simular login"
+        >
+          ▶
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</nav>

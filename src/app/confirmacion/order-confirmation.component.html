@@ -1,0 +1,71 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-7">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3">
+            <span class="d-inline-flex bg-success text-white rounded-circle align-items-center justify-content-center" style="width:72px; height:72px;">
+              <i class="bi bi-check-lg" style="font-size:1.6rem;"></i>
+            </span>
+          </div>
+
+          <h2 class="mb-1">¡Gracias por tu compra!</h2>
+          <p class="text-muted mb-3">Hemos recibido tu pedido y estamos procesándolo.</p>
+
+          <div *ngIf="orderId; else noOrder">
+            <p class="mb-1">Número de pedido: <strong>#{{ orderId }}</strong></p>
+            <p class="mb-3">Total pagado: <strong>{{ total | number:'1.2-2' }} €</strong></p>
+
+            <div class="row g-3 justify-content-center mb-3">
+              <div class="col-12 col-md-6 text-start">
+                <h6 class="mb-2">Datos de envío</h6>
+                <div *ngIf="shipping; else noShipping">
+                  <div class="small text-muted">Nombre</div>
+                  <div class="mb-1">{{ shipping?.nombre }}</div>
+
+                  <div class="small text-muted">Dirección</div>
+                  <div class="mb-1">{{ shipping?.direccion }}, {{ shipping?.ciudad }} {{ shipping?.cp }}</div>
+
+                  <div class="small text-muted">Teléfono</div>
+                  <div class="mb-1">{{ shipping?.telefono }}</div>
+                </div>
+                <ng-template #noShipping>
+                  <div class="text-muted small">No se encontraron datos de envío.</div>
+                </ng-template>
+              </div>
+
+              <div class="col-12 col-md-6 text-start">
+                <h6 class="mb-2">Pago</h6>
+                <div *ngIf="paymentMethod; else noPayment">
+                  <div class="mb-1 text-capitalize">
+                    {{ paymentMethod === 'card' ? 'Tarjeta' : (paymentMethod === 'cod' ? 'Contra entrega' : paymentMethod) }}
+                  </div>
+                  <div class="small text-muted">Verifica tu correo para el comprobante.</div>
+                </div>
+                <ng-template #noPayment>
+                  <div class="text-muted small">Método de pago no disponible.</div>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2">
+              <a class="btn btn-primary" routerLink="/home">Seguir comprando</a>
+              <a class="btn btn-outline-secondary" routerLink="/orders">Ver mis pedidos</a>
+            </div>
+
+            <div class="mt-4 text-muted small">
+              Si necesitas asistencia, contáctanos en soporte@mitienda.example (o el canal que uses).
+            </div>
+          </div>
+
+          <ng-template #noOrder>
+            <div class="alert alert-warning my-3">
+              No se encontró información del pedido. Si acabas de completar la compra, espera unos segundos o revisa la sección "Mis pedidos".
+            </div>
+            <a class="btn btn-primary" routerLink="/home">Volver a la tienda</a>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

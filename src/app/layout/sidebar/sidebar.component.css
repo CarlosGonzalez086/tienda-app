@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 1rem;
+  z-index: 1050;
+  transition: width 200ms ease, transform 250ms ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 64px !important;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    transform: translateX(-110%);
+    width: var(--sidebar-width, 220px);
+  }
+  .sidebar.open-mobile {
+    transform: translateX(0);
+  }
+}
+
+.logo-text {
+  white-space: nowrap;
+}
+.user-area .btn {
+  background: transparent;
+}
+.user-area .btn:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sidebar.collapsed .p-3,
+.sidebar.collapsed .mb-3 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.sidebar.collapsed .badge.small {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.35rem;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}

@@ -14,8 +14,8 @@ export interface RawApiResponse {
 export interface OrdersPage {
   success: boolean;
   message?: string;
-  parsed?: any; // parsed dtInfo from backend
-  ordersArray: any[]; // best-effort array of orders
+  parsed?: any; 
+  ordersArray: any[]; 
   totalRows: number;
   totalPages: number;
   raw?: RawApiResponse;

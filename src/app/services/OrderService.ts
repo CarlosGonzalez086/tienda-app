@@ -29,7 +29,6 @@ export interface ApiResponse {
   providedIn: 'root'
 })
 export class OrderService {
-  // Ajusta la URL si tu endpoint tiene prefijo/controller distinto
   private url = (environment.apiUrl ?? '').replace(/\/$/, '') + '/CompraCliente';
 
   constructor(private http: HttpClient, private auth: AuthService) {}

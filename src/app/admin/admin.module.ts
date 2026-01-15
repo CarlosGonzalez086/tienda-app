@@ -16,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
-    // Aquí puedes declarar componentes que no sean standalone
+
   ],
   imports: [
     CommonModule,

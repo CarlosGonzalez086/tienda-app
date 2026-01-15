@@ -8,11 +8,10 @@ export default defineConfig({
     fs: {
       allow: ['.'],
     },
-    // Reemplazo correcto de historyApiFallback
-    // Se llama "spaFallback" dentro de "server"
+
     open: true,
     middlewareMode: false,
-    // configurando manualmente el fallback
+
     hmr: true,
   },
   build: {

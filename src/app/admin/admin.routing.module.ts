@@ -25,7 +25,6 @@ const routes: Routes = [
     ],
   },
 
-  { path: '**', redirectTo: 'login' }, // SIN /
 ];
 
 @NgModule({

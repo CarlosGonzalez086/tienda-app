@@ -9,11 +9,11 @@ export class AuthGuard implements CanActivate {
 canActivate(): boolean {
   const token = this.tokenService.getToken();
 
-  // Si hay token → deja pasar
+
   if (token) return true;
 
   if (typeof window !== 'undefined') {
-    // No redirigir si ya estás en login o register
+
     const currentUrl = this.router.url;
     if (!currentUrl.includes('/admin/login') && !currentUrl.includes('/admin/register')) {
       this.router.navigate(['/admin/login']);

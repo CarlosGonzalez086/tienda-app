@@ -24,8 +24,8 @@ mat-card {
   font-size: 0.9rem;
 }
 .register-link a {
-  cursor: pointer; /* Esto hace que aparezca la manita */
-  text-decoration: underline; /* opcional, para que se vea más como enlace */
-  color: blue; /* opcional */
+  cursor: pointer;
+  text-decoration: underline; 
+  color: blue; 
 }
 

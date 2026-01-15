@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {
-  // Obtiene token solo si estamos en navegador
   getToken(): string | null {
     if (typeof window === 'undefined') return null;
     return localStorage.getItem('adminToken');

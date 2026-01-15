@@ -6,20 +6,18 @@ import { TokenService } from '../admin/services/token.service';
 export class AuthGuard implements CanActivate {
   constructor(private tokenService: TokenService, private router: Router) {}
 
-canActivate(): boolean {
-  const token = this.tokenService.getToken();
+  canActivate(): boolean {
+    const token = this.tokenService.getToken();
 
+    if (token) return true;
 
-  if (token) return true;
-
-  if (typeof window !== 'undefined') {
-
-    const currentUrl = this.router.url;
-    if (!currentUrl.includes('/admin/login') && !currentUrl.includes('/admin/register')) {
-      this.router.navigate(['/admin/login']);
+    if (typeof window !== 'undefined') {
+      const currentUrl = this.router.url;
+      if (!currentUrl.includes('/admin/login') && !currentUrl.includes('/admin/register')) {
+        this.router.navigate(['/admin/login']);
+      }
     }
-  }
 
-  return false;
-}
+    return false;
+  }
 }

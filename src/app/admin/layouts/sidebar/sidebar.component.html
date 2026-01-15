@@ -1,5 +1,4 @@
 <mat-sidenav-container class="sidenav-container">
-  <!-- Sidebar -->
   <mat-sidenav
     #drawer
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -21,8 +20,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Contenido principal -->
   <mat-sidenav-content>
-    <router-outlet></router-outlet> <!-- 👈 Aquí se renderizan todas las rutas hijas -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

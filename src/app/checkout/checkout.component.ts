@@ -57,12 +57,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     });
 
     this.paymentForm = this.fb.group({
-      metodo: ['card', Validators.required], 
+      metodo: ['card', Validators.required],
       cardNumber: [''],
       cardExp: [''],
       cardCvc: [''],
     });
-
 
     const sub = this.paymentForm.get('metodo')!.valueChanges.subscribe((v) => {
       const cardNumber = this.paymentForm.get('cardNumber')!;

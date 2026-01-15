@@ -1,3 +1,6 @@
-
-.card-title { margin-bottom: 1rem; }
-.invalid-feedback { display: block; }
+.card-title {
+  margin-bottom: 1rem;
+}
+.invalid-feedback {
+  display: block;
+}

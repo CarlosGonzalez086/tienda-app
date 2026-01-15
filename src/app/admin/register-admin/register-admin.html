@@ -1,0 +1,30 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-title>Registro Administrador</mat-card-title>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+        {{ loading ? 'Cargando...' : 'Registrarse' }}
+      </button>
+    </form>
+
+    <p class="register-link">
+      ¿Ya tienes cuenta?
+      <a [routerLink]="['/admin/login']">Inicia sesión aquí</a>
+    </p>
+  </mat-card>
+</div>

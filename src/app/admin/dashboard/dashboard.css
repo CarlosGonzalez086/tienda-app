@@ -1,0 +1,26 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.welcome-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: #f5f5f5;
+}
+
+mat-card {
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+

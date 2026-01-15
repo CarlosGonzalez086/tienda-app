@@ -1,0 +1,24 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-title>Login Administrador</mat-card-title>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+        {{ loading ? 'Cargando...' : 'Ingresar' }}
+      </button>
+    </form>
+    <p class="register-link">
+      ¿No tienes cuenta?
+      <a [routerLink]="['/admin/register']">Regístrate aquí</a>
+    </p>
+  </mat-card>
+</div>

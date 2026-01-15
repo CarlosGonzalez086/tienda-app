@@ -1,0 +1,77 @@
+<mat-card class="tienda-card">
+  <mat-toolbar color="primary">
+    <span>Listado de Tiendas</span>
+    <span class="spacer"></span>
+    <a
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/admin/tienda/form']"
+      routerLinkActive="active-link"
+    >
+      <mat-icon>add</mat-icon>
+      Nueva Tienda
+    </a>
+  </mat-toolbar>
+
+  <!-- Spinner / Loading -->
+  <div *ngIf="cargando" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Cargando tiendas...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!cargando && error" class="error-container">
+    Ocurrió un error al cargar las tiendas.
+  </div>
+
+  <!-- Tabla -->
+  <table
+    mat-table
+    [dataSource]="tiendas"
+    *ngIf="!cargando && !error"
+    class="mat-elevation-z8 full-width"
+  >
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let tienda">{{ tienda.id }}</td>
+    </ng-container>
+
+    <!-- Sucursal -->
+    <ng-container matColumnDef="sucursal">
+      <th mat-header-cell *matHeaderCellDef>Sucursal</th>
+      <td mat-cell *matCellDef="let tienda">{{ tienda.sucursal }}</td>
+    </ng-container>
+
+    <!-- Dirección -->
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef>Dirección</th>
+      <td mat-cell *matCellDef="let tienda">{{ tienda.direccion }}</td>
+    </ng-container>
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef class="text-center">Acciones</th>
+      <td mat-cell *matCellDef="let tienda" class="text-center">
+        <a
+          mat-icon-button
+          color="primary"
+          [routerLink]="['/admin/tienda/form', tienda.id]"
+          routerLinkActive="active-link"
+        >
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button mat-icon-button color="warn" (click)="eliminarTienda(tienda.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr *ngIf="tiendas.data.length === 0">
+      <td colspan="4" class="text-center">No hay tiendas registradas.</td>
+    </tr>
+  </table>
+</mat-card>

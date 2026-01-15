@@ -2,16 +2,25 @@
   <div class="toolbar">
     <div class="left">
       <label>
-        Mostrar:
-        <select [(ngModel)]="pageSize" (change)="changePageSize(pageSize)">
-          <option *ngFor="let s of pageSizes" [ngValue]="s">{{ s }}</option>
+        Mostrar
+        <select
+          [(ngModel)]="pageSize"
+          (change)="changePageSize(pageSize)"
+          aria-label="Cantidad por página"
+        >
+          <option *ngFor="let s of pageSizes" [ngValue]="s">
+            {{ s }}
+          </option>
         </select>
         por página
       </label>
     </div>
+
     <div class="right">
-      <span *ngIf="loading">Cargando...</span>
-      <span *ngIf="!loading">{{ totalCount }} artículos</span>
+      <span *ngIf="loading" class="text-muted">
+        <i class="bi bi-arrow-repeat me-1"></i> Cargando...
+      </span>
+      <span *ngIf="!loading" class="text-muted"> {{ totalCount }} artículos </span>
     </div>
   </div>
 
@@ -21,22 +30,33 @@
         <img
           *ngIf="imageSrc(a)"
           [src]="imageSrc(a)"
-          [alt]="a.descripcion || a.codigo || 'Artículo'"
+          [alt]="a.descripcion || a.name || 'Artículo'"
         />
-        <div *ngIf="!imageSrc(a)" class="no-image">Sin imagen</div>
+        <div *ngIf="!imageSrc(a)" class="no-image">
+          <i class="bi bi-image"></i>
+          <span class="ms-1">Sin imagen</span>
+        </div>
       </div>
 
       <div class="card-body">
-        <h3 class="card-title">{{ a.descripcion || a.name }}</h3>
-        <p class="card-code" *ngIf="a.codigo">Código: {{ a.codigo }}</p>
-        <p class="card-stock" [class.out]="(a.stock ?? 0) <= 0">Stock: {{ a.stock ?? 0 }}</p>
-        <p class="card-price">{{ formatPrice(a.precio) }}</p>
+        <h3 class="card-title">
+          {{ a.descripcion || a.name }}
+        </h3>
 
-        <!-- Acciones del carrito -->
+        <p class="card-code" *ngIf="a.codigo">Código: {{ a.codigo }}</p>
+
+        <p class="card-stock" [class.out]="(a.stock ?? 0) <= 0">
+          <i class="bi bi-box me-1"></i>
+          {{ (a.stock ?? 0) > 0 ? 'Disponible' : 'Sin stock' }}
+        </p>
+
+        <p class="card-price">
+          {{ formatPrice(a.precio) }}
+        </p>
+
         <div class="card-actions">
           <ng-container *ngIf="getCartQty(a) > 0; else showAdd">
-            <div class="d-flex align-items-center gap-2">
-              <!-- Grupo de botones para cantidad -->
+            <div class="d-flex align-items-center gap-2 flex-wrap">
               <div class="btn-group btn-group-sm" role="group" aria-label="Cantidad">
                 <button
                   type="button"
@@ -47,8 +67,9 @@
                   −
                 </button>
 
-                <!-- Mostrar cantidad como control no editable -->
-                <span class="btn btn-light disabled px-3">{{ getCartQty(a) }}</span>
+                <span class="btn btn-light disabled px-3">
+                  {{ getCartQty(a) }}
+                </span>
 
                 <button
                   type="button"
@@ -60,17 +81,26 @@
                 </button>
               </div>
 
-              <!-- Botón eliminar -->
-              <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeFromCart(a)">
-                Eliminar
+              <button
+                type="button"
+                class="btn btn-sm btn-danger"
+                (click)="removeFromCart(a)"
+                aria-label="Eliminar del carrito"
+              >
+                <i class="bi bi-trash"></i>
               </button>
             </div>
           </ng-container>
 
           <ng-template #showAdd>
-            <!-- Botón principal de agregar -->
-            <button type="button" class="btn btn-primary btn-sm w-100" (click)="addToCart(a)">
-              <i class="bi bi-cart-plus me-1" aria-hidden="true"></i> Agregar al carrito
+            <button
+              type="button"
+              class="btn btn-primary btn-sm w-100 fw-semibold"
+              (click)="addToCart(a)"
+              aria-label="Agregar al carrito"
+            >
+              <i class="bi bi-cart-plus me-1"></i>
+              Agregar al carrito
             </button>
           </ng-template>
         </div>
@@ -78,18 +108,20 @@
     </div>
   </div>
 
-  <!-- Paginador -->
-  <nav class="paginator" *ngIf="totalPages > 1">
-    <button (click)="prevPage()" [disabled]="page === 1">Prev</button>
+  <nav class="paginator" *ngIf="totalPages > 1" aria-label="Paginación">
+    <button (click)="prevPage()" [disabled]="page === 1" aria-label="Página anterior">‹</button>
 
     <button
       *ngFor="let _ of pages; let i = index"
       (click)="goToPage(i + 1)"
       [class.active]="page === i + 1"
+      aria-label="Ir a página {{ i + 1 }}"
     >
       {{ i + 1 }}
     </button>
 
-    <button (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+    <button (click)="nextPage()" [disabled]="page === totalPages" aria-label="Página siguiente">
+      ›
+    </button>
   </nav>
 </div>

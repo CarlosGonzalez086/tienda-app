@@ -1,39 +1,59 @@
 .articles-container {
-  padding: 1rem;
-  max-width: 1200px;
+  padding: 1.25rem;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
 .toolbar {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
   align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.toolbar label {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.toolbar select {
+  margin: 0 0.4rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5f5;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
 }
 
 .card {
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
   overflow: hidden;
-  background: #fff;
   display: flex;
   flex-direction: column;
-  min-height: 260px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+  border-color: #c7d2fe;
 }
 
 .card-image {
-  height: 150px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fafafa;
-  overflow:hidden;
+  position: relative;
+  height: 170px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-image img {
@@ -43,64 +63,94 @@
 }
 
 .no-image {
-  color:#999;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #64748b;
 }
 
 .card-body {
-  padding: 0.75rem;
-  display:flex;
-  flex-direction:column;
-  gap:0.5rem;
-  flex:1;
+  padding: 0.9rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
 }
 
 .card-title {
-  margin:0;
-  font-size: 1rem;
-  line-height:1.2;
-  height:2.4rem;
-  overflow:hidden;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6rem;
+}
+
+.card-code {
+  font-size: 0.75rem;
+  color: #64748b;
 }
 
 .card-stock {
-  margin:0;
-  font-size:0.9rem;
+  font-size: 0.8rem;
+  color: #16a34a;
+  font-weight: 500;
 }
 
 .card-stock.out {
-  color: #b00020;
-  font-weight:600;
+  color: #dc2626;
 }
 
 .card-price {
-  margin-top:auto;
-  font-weight:700;
-  font-size:1.05rem;
+  margin-top: auto;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.card-actions {
+  margin-top: 0.75rem;
+}
+
+.card-actions .btn {
+  border-radius: 10px;
+}
+
+.btn-group .btn {
+  min-width: 32px;
 }
 
 .paginator {
-  display:flex;
-  gap:0.25rem;
-  justify-content:center;
-  margin-top:1rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .paginator button {
-  padding:0.3rem 0.6rem;
-  border:1px solid #ddd;
-  background:#fff;
-  cursor:pointer;
-  border-radius:4px;
+  min-width: 34px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.paginator button:hover {
+  background: #f1f5f9;
 }
 
 .paginator button.active {
-  background:#1976d2;
-  color:#fff;
-  border-color:#1976d2;
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
 }
 
 .paginator button[disabled] {
-  opacity:0.5;
-  cursor:not-allowed;
+  opacity: 0.45;
+  cursor: not-allowed;
 }

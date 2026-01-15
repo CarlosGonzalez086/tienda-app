@@ -40,13 +40,13 @@ export class RegistrationComponent {
     this.serverMessage = null;
 
     if (this.registerForm.invalid) {
-      Object.values(this.f).forEach(c => c.markAsTouched());
+      Object.values(this.f).forEach((c) => c.markAsTouched());
       this.serverMessage = { type: 'error', text: 'Corrige los errores del formulario.' };
       return;
     }
 
     const payload: DtoCliente = {
-      id:0,
+      id: 0,
       nombre: this.f['nombre'].value,
       apellidos: this.f['apellidos'].value,
       direccion: this.f['direccion'].value,
@@ -56,12 +56,16 @@ export class RegistrationComponent {
 
     this.loading = true;
 
-    this.registrationService.saveClient(payload)
+    this.registrationService
+      .saveClient(payload)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
         next: (resp: ApiResponse) => {
           if (resp?.codigo === '200') {
-            this.serverMessage = { type: 'success', text: resp.mensaje || 'Usuario registrado correctamente.' };
+            this.serverMessage = {
+              type: 'success',
+              text: resp.mensaje || 'Usuario registrado correctamente.',
+            };
             setTimeout(() => this.router.navigate(['/login']), 1200);
           } else {
             this.serverMessage = { type: 'error', text: resp?.mensaje || 'Error en el registro.' };
@@ -69,7 +73,10 @@ export class RegistrationComponent {
         },
         error: (err) => {
           console.error('Error al registrar cliente', err);
-          this.serverMessage = { type: 'error', text: err?.message || 'Error de conexión al registrar.' };
+          this.serverMessage = {
+            type: 'error',
+            text: err?.message || 'Error de conexión al registrar.',
+          };
         },
       });
   }

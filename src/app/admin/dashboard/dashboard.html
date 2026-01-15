@@ -1,0 +1,16 @@
+<div class="dashboard-container">
+  <mat-toolbar color="primary">
+    <span>Admin Dashboard</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Cerrar sesión</button>
+  </mat-toolbar>
+
+  <div class="welcome-card">
+    <mat-card>
+      <mat-card-title>Bienvenido {{ adminName }}!</mat-card-title>
+      <mat-card-content>
+        <p>Este es tu panel de administración.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

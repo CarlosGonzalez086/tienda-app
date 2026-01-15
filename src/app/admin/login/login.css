@@ -1,0 +1,31 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4a90e2, #9013fe);
+}
+
+mat-card {
+  padding: 2rem;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+.register-link a {
+  cursor: pointer; /* Esto hace que aparezca la manita */
+  text-decoration: underline; /* opcional, para que se vea más como enlace */
+  color: blue; /* opcional */
+}
+

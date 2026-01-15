@@ -1,13 +1,36 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SidebarComponent],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  template: `
+    <div class="app-container">
+      <app-sidebar *ngIf="showSidebar"></app-sidebar>
+      <main class="main-content" [class.full-width]="!showSidebar">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  `,
+  styleUrls: ['./app.css'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, SidebarComponent],
 })
-export class App {
-  protected readonly title = signal('tienda-app');
+export class AppComponent {
+  showSidebar = true;
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const sidebarRoutes = ['/home', '/cart', '/orders'];
+        this.showSidebar = sidebarRoutes.some((route) =>
+          event.urlAfterRedirects.startsWith(route)
+        );
+      });
+  }
 }

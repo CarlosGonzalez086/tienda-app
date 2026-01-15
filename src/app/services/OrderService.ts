@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 import { AuthService } from './AuthServices';
 
-
 export interface DtoArticuloClienteDetalle {
   id?: number;
   articulo_id: number;
@@ -26,7 +25,7 @@ export interface ApiResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
   private url = (environment.apiUrl ?? '').replace(/\/$/, '') + '/CompraCliente';
@@ -34,7 +33,10 @@ export class OrderService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   saveOrder(payload: DtoArticuloCliente): Observable<ApiResponse> {
-    const token = (this.auth && typeof (this.auth as any).getToken === 'function') ? (this.auth as any).getToken() : null;
+    const token =
+      this.auth && typeof (this.auth as any).getToken === 'function'
+        ? (this.auth as any).getToken()
+        : null;
     let headers = undefined;
     if (token) {
       headers = new HttpHeaders({ Authorization: `Bearer ${token}` });

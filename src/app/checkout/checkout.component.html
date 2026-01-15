@@ -8,15 +8,26 @@
           <form [formGroup]="shippingForm" (ngSubmit)="$event.preventDefault()">
             <div class="mb-2">
               <label class="form-label">Nombre y apellidos</label>
-              <input class="form-control" formControlName="nombre" placeholder="Ej. Carlos González" />
-              <div class="text-danger small" *ngIf="shippingForm.get('nombre')?.invalid && shippingForm.get('nombre')?.touched">
+              <input
+                class="form-control"
+                formControlName="nombre"
+                placeholder="Ej. Carlos González"
+              />
+              <div
+                class="text-danger small"
+                *ngIf="shippingForm.get('nombre')?.invalid && shippingForm.get('nombre')?.touched"
+              >
                 Nombre obligatorio.
               </div>
             </div>
 
             <div class="mb-2">
               <label class="form-label">Dirección</label>
-              <input class="form-control" formControlName="direccion" placeholder="Calle, número, piso..." />
+              <input
+                class="form-control"
+                formControlName="direccion"
+                placeholder="Calle, número, piso..."
+              />
             </div>
 
             <div class="row">
@@ -56,7 +67,11 @@
 
             <div class="ps-4 mt-2" *ngIf="paymentForm.get('metodo')?.value === 'card'">
               <div class="mb-2">
-                <input class="form-control" placeholder="Número de tarjeta" formControlName="cardNumber" />
+                <input
+                  class="form-control"
+                  placeholder="Número de tarjeta"
+                  formControlName="cardNumber"
+                />
               </div>
               <div class="row">
                 <div class="col-6 mb-2">
@@ -66,7 +81,9 @@
                   <input class="form-control" placeholder="CVC" formControlName="cardCvc" />
                 </div>
               </div>
-              <div class="small text-muted">La entrada es simulada — en producción integra Stripe/Checkout u otro proveedor.</div>
+              <div class="small text-muted">
+                La entrada es simulada — en producción integra Stripe/Checkout u otro proveedor.
+              </div>
             </div>
 
             <div class="form-check mt-2">
@@ -85,10 +102,17 @@
           <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 
           <div class="d-flex gap-2">
-            <button class="btn btn-outline-secondary" (click)="backToCart()" [disabled]="loading">Volver al carrito</button>
+            <button class="btn btn-outline-secondary" (click)="backToCart()" [disabled]="loading">
+              Volver al carrito
+            </button>
             <button class="btn btn-primary ms-auto" (click)="submitOrder()" [disabled]="loading">
-              <span *ngIf="!loading">Pagar {{ total | number:'1.2-2' }} MXN</span>
-              <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span *ngIf="!loading">Pagar {{ total | number : '1.2-2' }} MXN</span>
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
             </button>
           </div>
         </div>
@@ -102,19 +126,24 @@
           <h5 class="card-title">Resumen del pedido</h5>
 
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let it of (items$ | async)">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-start"
+              *ngFor="let it of items$ | async"
+            >
               <div class="me-auto">
                 <div class="fw-semibold">{{ it.title }}</div>
-                <small class="text-muted">x{{ it.qty }} · {{ it.price | number:'1.2-2' }} MXN</small>
+                <small class="text-muted"
+                  >x{{ it.qty }} · {{ it.price | number : '1.2-2' }} MXN</small
+                >
               </div>
               <div class="text-end">
-                <div class="fw-semibold">{{ (it.price * it.qty) | number:'1.2-2' }} MXN</div>
+                <div class="fw-semibold">{{ it.price * it.qty | number : '1.2-2' }} MXN</div>
               </div>
             </li>
 
             <li class="list-group-item d-flex justify-content-between">
               <span>Subtotal</span>
-              <strong>{{ total | number:'1.2-2' }} MXN</strong>
+              <strong>{{ total | number : '1.2-2' }} MXN</strong>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Envío</span>
@@ -127,7 +156,10 @@
           </ul>
 
           <div class="text-center">
-            <small class="text-muted">Al hacer clic en "Pagar" confirmarás el pedido y serás redirigido a la confirmación.</small>
+            <small class="text-muted"
+              >Al hacer clic en "Pagar" confirmarás el pedido y serás redirigido a la
+              confirmación.</small
+            >
           </div>
         </div>
       </div>

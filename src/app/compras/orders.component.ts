@@ -58,7 +58,6 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.page = p;
     this.skip = (this.page - 1) * this.take;
 
-    // start loading state
     this.loading = true;
     this.error = null;
     this.showContent = false;

@@ -19,7 +19,7 @@ export interface ApiResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegistrationService {
   private url = (environment.apiUrl ?? '').replace(/\/$/, '') + '/Cliente';

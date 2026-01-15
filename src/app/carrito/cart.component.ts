@@ -17,13 +17,9 @@ export class CartComponent {
   items$!: Observable<CartItem[]>;
   total = 0;
 
-  constructor(
-    private cart: CartService,
-    private auth: AuthService,
-    private router: Router
-  ) {
+  constructor(private cart: CartService, private auth: AuthService, private router: Router) {
     this.items$ = this.cart.items$;
-    this.cart.items$.subscribe(list => {
+    this.cart.items$.subscribe((list) => {
       this.total = list.reduce((s, it) => s + (it.price || 0) * (it.qty || 0), 0);
     });
   }
@@ -45,12 +41,14 @@ export class CartComponent {
   }
 
   checkout() {
-    this.auth.user$.subscribe(u => {
-      if (u) {
-        this.router.navigate(['/checkout']);
-      } else {
-        this.router.navigate(['/login']);
-      }
-    }).unsubscribe();
+    this.auth.user$
+      .subscribe((u) => {
+        if (u) {
+          this.router.navigate(['/checkout']);
+        } else {
+          this.router.navigate(['/login']);
+        }
+      })
+      .unsubscribe();
   }
 }

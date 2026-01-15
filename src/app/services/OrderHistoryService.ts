@@ -4,7 +4,6 @@ import { Observable, map } from 'rxjs';
 import { environment } from '../../environment/environment';
 import { AuthService } from './AuthServices';
 
-
 export interface RawApiResponse {
   codigo: string;
   mensaje: string;
@@ -14,15 +13,15 @@ export interface RawApiResponse {
 export interface OrdersPage {
   success: boolean;
   message?: string;
-  parsed?: any; 
-  ordersArray: any[]; 
+  parsed?: any;
+  ordersArray: any[];
   totalRows: number;
   totalPages: number;
   raw?: RawApiResponse;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderHistoryService {
   private url = (environment.apiUrl ?? '').replace(/\/$/, '') + '/CompraCliente/lista';
@@ -30,13 +29,16 @@ export class OrderHistoryService {
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   listOrders(take = 5, skip = 0): Observable<OrdersPage> {
-    const token = (this.auth && typeof (this.auth as any).getToken === 'function') ? (this.auth as any).getToken() : null;
+    const token =
+      this.auth && typeof (this.auth as any).getToken === 'function'
+        ? (this.auth as any).getToken()
+        : null;
     const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
 
     const params = `?iTake=${take}&iSkip=${skip}`;
 
     return this.http.get<RawApiResponse>(this.url + params, headers ? { headers } : {}).pipe(
-      map(resp => {
+      map((resp) => {
         const result: OrdersPage = {
           success: resp?.codigo === '200',
           message: resp?.mensaje ?? null,
@@ -44,7 +46,7 @@ export class OrderHistoryService {
           ordersArray: [],
           totalRows: 0,
           totalPages: 0,
-          raw: resp
+          raw: resp,
         };
 
         try {

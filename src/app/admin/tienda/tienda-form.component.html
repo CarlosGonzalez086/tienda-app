@@ -1,0 +1,37 @@
+<mat-card class="form-card">
+  <mat-toolbar color="primary" class="form-toolbar">
+    <mat-icon>{{ tiendaId ? 'edit' : 'store' }}</mat-icon>
+    <span>{{ tiendaId ? 'Editar Tienda' : 'Crear Tienda' }}</span>
+  </mat-toolbar>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" class="form-container">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Sucursal</mat-label>
+      <mat-icon matPrefix>storefront</mat-icon>
+      <input matInput formControlName="sucursal" required>
+      <mat-error *ngIf="form.get('sucursal')?.hasError('required')">
+        La sucursal es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <mat-icon matPrefix>location_on</mat-icon>
+      <input matInput formControlName="direccion" required>
+      <mat-error *ngIf="form.get('direccion')?.hasError('required')">
+        La dirección es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || cargando">
+        <mat-icon *ngIf="cargando" class="spinner-icon">autorenew</mat-icon>
+        {{ tiendaId ? 'Actualizar' : 'Crear' }}
+      </button>
+      <button mat-raised-button color="warn" type="button" (click)="router.navigate(['/tienda/list'])">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,26 @@
+.tienda-card {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.error-container {
+  color: #f44336;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.full-width {
+  width: 100%;
+}

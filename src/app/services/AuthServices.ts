@@ -65,8 +65,6 @@ export class AuthService {
     return this.isBrowser ? localStorage.getItem(this.tokenKey) : null;
   }
 
-  // ================= JWT =================
-
   private parseUserFromToken(token: string): User | null {
     const payload = this.parseJwtPayload(token);
     if (!payload) return null;

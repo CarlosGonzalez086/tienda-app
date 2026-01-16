@@ -11,6 +11,7 @@ import { ArticuloListComponent } from './articulos/articulo-list.component';
 import { ArticuloFormComponent } from './articulos/articulo-form.component';
 
 const routes: Routes = [
+  { path: 'admin', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterAdminComponent },
 

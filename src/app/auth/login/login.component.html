@@ -1,46 +1,48 @@
 <div class="login-wrapper">
-  <form (ngSubmit)="submit()" [formGroup]="form" class="login-form" novalidate>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="login-form" novalidate>
     <h2>Iniciar sesión</h2>
 
-    <label class="form-label">
-      Correo
+    <label>
+      Correo electrónico
       <input
-        class="form-control"
         type="email"
+        class="form-control"
         formControlName="correo_electronico"
         placeholder="tu@correo.com"
       />
     </label>
-    <div
-      class="error text-danger small"
-      *ngIf="form.get('correo_electronico')?.touched && form.get('correo_electronico')?.invalid"
-    >
-      Introduce un correo válido.
+
+    <div class="error" *ngIf="f['correo_electronico'].touched && f['correo_electronico'].invalid">
+      Introduce un correo válido
     </div>
 
-    <label class="form-label mt-2">
+    <label class="mt-2">
       Contraseña
       <input
-        class="form-control"
         type="password"
+        class="form-control"
         formControlName="contrasena"
         placeholder="••••••"
       />
     </label>
-    <div
-      class="error text-danger small"
-      *ngIf="form.get('contrasena')?.touched && form.get('contrasena')?.invalid"
-    >
-      La contraseña debe tener al menos 4 caracteres.
+
+    <div class="error" *ngIf="f['contrasena'].touched && f['contrasena'].invalid">
+      La contraseña debe tener al menos 4 caracteres
     </div>
 
-    <div class="actions mt-3 d-flex align-items-center gap-2">
+    <div class="actions mt-3">
       <button type="submit" class="btn btn-primary" [disabled]="loading">
-        {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
+        <span *ngIf="!loading">Iniciar sesión</span>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
       </button>
-      <a class="btn btn-outline-secondary ms-auto" routerLink="/register">Crear cuenta</a>
+
+      <a routerLink="/register" class="btn btn-outline-secondary ms-auto">
+        Crear cuenta
+      </a>
     </div>
 
-    <div class="error text-danger mt-3" *ngIf="error">{{ error }}</div>
+    <div class="alert alert-danger mt-3" *ngIf="error">
+      {{ error }}
+    </div>
   </form>
 </div>

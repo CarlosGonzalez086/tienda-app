@@ -1,6 +1,45 @@
 .card-title {
   margin-bottom: 1rem;
+  font-weight: 600;
 }
+
+
+.form-control.ng-touched.ng-invalid {
+  border-color: #dc3545;
+}
+
+
 .invalid-feedback {
+  display: none;
+  font-size: 0.85rem;
+}
+
+.form-control.ng-touched.ng-invalid + .invalid-feedback {
   display: block;
+}
+
+
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+
+.spinner-border {
+  vertical-align: middle;
+}
+
+
+.card {
+  border-radius: 10px;
+}
+
+
+.alert {
+  font-size: 0.9rem;
+}
+
+
+.text-muted {
+  text-align: center;
 }

@@ -7,6 +7,8 @@ import { DashboardComponent } from './dashboard/dashboard';
 import { AdminLayoutComponent } from '../admin-layout.component';
 import { TiendaListComponent } from './tienda/tienda-list.component';
 import { TiendaFormComponent } from './tienda/tienda-form.component';
+import { ArticuloListComponent } from './articulos/articulo-list.component';
+import { ArticuloFormComponent } from './articulos/articulo-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,9 +24,11 @@ const routes: Routes = [
       { path: 'tienda', component: TiendaListComponent },
       { path: 'tienda/form', component: TiendaFormComponent },
       { path: 'tienda/form/:id', component: TiendaFormComponent },
+      { path: 'articulos', component: ArticuloListComponent },
+      { path: 'articulos/form', component: ArticuloFormComponent },
+      { path: 'articulos/form/:id', component: ArticuloFormComponent },
     ],
   },
-
 ];
 
 @NgModule({

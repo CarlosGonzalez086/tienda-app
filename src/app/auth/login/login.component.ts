@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { finalize } from 'rxjs/operators';
 import { AuthService } from '../../services/AuthServices';
 
 @Component({
@@ -14,46 +18,56 @@ import { AuthService } from '../../services/AuthServices';
 })
 export class LoginComponent {
   form: FormGroup;
-
   loading = false;
   error: string | null = null;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.form = this.fb.group({
       correo_electronico: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
 
-  submit() {
+  get f() {
+    return this.form.controls;
+  }
+
+  submit(): void {
     this.error = null;
+
+    if (this.loading) return;
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      this.error = 'Corrige los errores del formulario';
       return;
     }
 
     const { correo_electronico, contrasena } = this.form.value;
     this.loading = true;
 
-    this.auth
-      .login(correo_electronico!, contrasena!)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe({
-        next: (resp: any) => {
-          if (resp?.codigo === '200') {
-            this.router.navigate(['/home']);
-          } else {
-            this.error = resp?.mensaje || 'Credenciales incorrectas';
-          }
-        },
-        error: (err) => {
-          console.error('Login error', err);
-          this.error = err?.message || 'Error de conexión';
-        },
-      });
+    this.authService.login(correo_electronico, contrasena).subscribe({
+      next: (resp) => {
+        if (resp?.codigo === '200') {
+          this.router.navigate(['/home']);
+        } else {
+          this.error = resp?.mensaje || 'Credenciales incorrectas';
+        }
+      },
+      error: () => {
+        this.error = 'Error de conexión con el servidor';
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 
-  goRegister() {
+  goRegister(): void {
     this.router.navigate(['/register']);
   }
 }

@@ -1,0 +1,59 @@
+<mat-card class="form-card">
+  <mat-toolbar color="primary">
+    <mat-icon>{{ articuloId ? 'edit' : 'add' }}</mat-icon>
+    <span>{{ articuloId ? 'Editar Artículo' : 'Crear Artículo' }}</span>
+  </mat-toolbar>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput formControlName="codigo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Precio</mat-label>
+      <input matInput formControlName="precio" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Imagen</mat-label>
+
+      <!-- Input oculto -->
+      <input type="file" accept="image/*" hidden #fileInput (change)="onFileSelected($event)" />
+
+      <!-- Input visual -->
+      <input
+        matInput
+        readonly
+        [value]="nombreImagen || 'Seleccionar imagen'"
+        (click)="fileInput.click()"
+      />
+
+      <button mat-icon-button matSuffix (click)="fileInput.click()">
+        <mat-icon>image</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- Preview -->
+    <div *ngIf="previewImagen" class="image-preview">
+      <img [src]="previewImagen" alt="Preview" />
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Stock</mat-label>
+      <input matInput formControlName="stock" />
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || cargando">
+        {{ articuloId ? 'Actualizar' : 'Crear' }}
+      </button>
+
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</mat-card>

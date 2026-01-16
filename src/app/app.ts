@@ -27,7 +27,7 @@ export class AppComponent {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        const sidebarRoutes = ['/home', '/cart', '/orders'];
+        const sidebarRoutes = ['/home', '/cart', '/orders','/checkout','/order-confirmation'];
         this.showSidebar = sidebarRoutes.some((route) =>
           event.urlAfterRedirects.startsWith(route)
         );

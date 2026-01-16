@@ -23,10 +23,8 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Imagen</mat-label>
 
-      <!-- Input oculto -->
       <input type="file" accept="image/*" hidden #fileInput (change)="onFileSelected($event)" />
 
-      <!-- Input visual -->
       <input
         matInput
         readonly
@@ -39,7 +37,6 @@
       </button>
     </mat-form-field>
 
-    <!-- Preview -->
     <div *ngIf="previewImagen" class="image-preview">
       <img [src]="previewImagen" alt="Preview" />
     </div>
